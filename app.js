@@ -67,6 +67,58 @@
     .then(buildOrbit)
     .catch(function (e) { console.warn("Flags failed to load", e); });
 
+  /* ---------------- Photo strip: rotates through the photos three times, then fades away ---------------- */
+  (function () {
+    var wrap = document.getElementById("polaroids");
+    var replay = document.getElementById("replay-photos");
+    if (!wrap) return;
+    var cards = Array.prototype.slice.call(wrap.querySelectorAll(".polaroid"));
+    var n = cards.length, CYCLES = 3, STEP = 3200, timer = null, step = 0;
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    cards.forEach(function (c) { var img = c.querySelector("img"); img.style.objectPosition = c.getAttribute("data-pos") || "center"; });
+
+    // Layout: the "front" card sits centered and upright; the others fan out behind it.
+    function layout(front) {
+      cards.forEach(function (c, i) {
+        var d = (i - front + n) % n;            // 0 = front, then 1..n-1 behind, alternating sides
+        var side = d % 2 === 0 ? 1 : -1;
+        var depth = Math.ceil(d / 2);
+        c.style.setProperty("--x", d === 0 ? "0px" : (side * (110 + depth * 40)) + "px");
+        c.style.setProperty("--tilt", d === 0 ? "0deg" : (side * (4 + depth * 3)) + "deg");
+        c.style.setProperty("--s", d === 0 ? 1 : 1 - depth * 0.08);
+        c.style.setProperty("--o", d === 0 ? 1 : 0.85 - depth * 0.15);
+        c.style.setProperty("--z", n - d);
+      });
+    }
+
+    function start() {
+      wrap.classList.remove("gone");
+      replay.hidden = true;
+      step = 0; layout(0);
+      if (reduced) return;                     // static stack for people who prefer less motion
+      clearInterval(timer);
+      timer = setInterval(function () {
+        step++;
+        if (step >= n * CYCLES) {              // three full passes done: let them go
+          clearInterval(timer);
+          wrap.classList.add("gone");
+          setTimeout(function () { replay.hidden = false; }, 1200);
+          return;
+        }
+        layout(step % n);
+      }, STEP);
+    }
+
+    replay.addEventListener("click", start);
+    // Only start once the strip is on screen so visitors actually see all three passes.
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { io.disconnect(); start(); }
+      }, { threshold: 0.4 });
+      layout(0); io.observe(wrap);
+    } else { start(); }
+  })();
+
   /* ---------------- Form ---------------- */
   var cfg = window.SITE_CONFIG || {};
   var form = document.getElementById("concern-form");
