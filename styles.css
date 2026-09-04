@@ -161,11 +161,12 @@ h3 { font-family: var(--font-head); font-size: 1.25rem; margin: 10px 0 8px; }
   background: #fff; border-radius: 999px; padding: 6px 12px; font-weight: 700; font-size: 0.92rem;
   box-shadow: 0 2px 8px rgba(31,42,68,0.08);
 }
-.chips li:nth-child(1) { border-left: 4px solid var(--sky); }
-.chips li:nth-child(2) { border-left: 4px solid var(--mint); }
-.chips li:nth-child(3) { border-left: 4px solid var(--lilac); }
-.chips li:nth-child(4) { border-left: 4px solid var(--coral); }
-.chips li:nth-child(5) { border-left: 4px solid var(--gold); }
+.chips li:nth-child(5n+1) { border-left: 4px solid var(--sky); }
+.chips li:nth-child(5n+2) { border-left: 4px solid var(--mint); }
+.chips li:nth-child(5n+3) { border-left: 4px solid var(--lilac); }
+.chips li:nth-child(5n+4) { border-left: 4px solid var(--coral); }
+.chips li:nth-child(5n+5) { border-left: 4px solid var(--gold); }
+.honor-title em { font-style: normal; color: var(--coral-deep); text-transform: uppercase; letter-spacing: 0.04em; }
 
 .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .card {
