@@ -1,7 +1,7 @@
 // Site configuration. This file is safe to commit publicly.
-// After you deploy the Google Apps Script backend (see README.md), paste its
-// Web App URL below. Until then the site runs in "demo mode" and stores
-// submissions only in the visitor's own browser.
+// The endpoint is the Google Apps Script web app that stores responses in
+// Amber's private Google Sheet. The dashboard passcode is NOT here; it lives
+// only in the Apps Script project's Script Properties.
 window.SITE_CONFIG = {
-  endpoint: ""
+  endpoint: "https://script.google.com/macros/s/AKfycbycHwL2inbtESHO-qWGamRxiImsCdJkr2rx2Aw5vpmAF1a4TCwhM5CADF9GhRJoZozVXQ/exec"
 };
