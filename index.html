@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amber Bellou for HGSE Student Council</title>
+  <meta name="description" content="Amber Bellou is running for HGSE Student Council. Share a concern, an idea, or anything you'd like improved at HGSE.">
+  <meta property="og:title" content="Amber Bellou for HGSE Student Council">
+  <meta property="og:description" content="Tell me what would make HGSE better for you. Every voice, every flag, every story.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌍</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span><span class="blob b4"></span>
+  </div>
+  <div class="orbit" id="orbit" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="brand" href="#top">Amber Bellou</a>
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#priorities">Priorities</a>
+      <a href="#share" class="nav-cta">Share a concern</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="glass hero-card">
+        <p class="eyebrow">HGSE Student Council</p>
+        <h1>Every voice at HGSE<br><span class="grad">deserves to be heard.</span></h1>
+        <p class="lede">Hi, I'm Amber. I'm running for Student Council because I want to listen first, gather what we actually need, and turn it into real improvements for all of us.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#share">Tell me what to improve</a>
+          <a class="btn ghost" href="#about">Who is Amber?</a>
+        </div>
+        <p class="tiny">Anonymous by default. Takes one minute.</p>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="glass">
+        <p class="eyebrow">About me</p>
+        <h2>A little bit of everywhere, all the way to Appian Way.</h2>
+        <div class="two-col">
+          <div>
+            <p>My family is Algerian. I grew up in France and spent parts of my childhood in other countries, which is how I picked up English. I came to the United States as an international student in high school and I stayed.</p>
+            <p>I studied <strong>anthropology</strong> because I love people, and <strong>political science</strong> because I believe policy is how positive change lasts. I minored in <strong>environmental science</strong> out of care for the planet and the generations who inherit it, and I followed the <strong>pre-med track</strong> because health and wellbeing matter deeply to me.</p>
+            <p>I then earned a <strong>master's in data and computational social science</strong>. That training taught me how to listen to a community at scale and turn what I hear into decisions. That is exactly what I hope to do for you.</p>
+          </div>
+          <div class="honor">
+            <p class="honor-title">I would be especially honored to serve</p>
+            <ul class="chips">
+              <li>International students</li>
+              <li>African students</li>
+              <li>Muslim students</li>
+              <li>Women</li>
+              <li>And every student at HGSE</li>
+            </ul>
+            <p class="small">If you have ever felt far from home, new to a system, or unsure who to ask, I have been there. I will make sure you are never navigating alone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="priorities" class="section">
+      <div class="glass">
+        <p class="eyebrow">What I will work on</p>
+        <h2>Simple promises, kept in the open.</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="icon">🚪</div>
+            <h3>Open doors to opportunity</h3>
+            <p>Better, fairer access to internships, research assistantships, and lab experiences for <em>all</em> HGSE students, with clear timelines and a shared place to find them.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🌉</div>
+            <h3>One Harvard, not one building</h3>
+            <p>Stronger bridges to the other Harvard schools so we can take part in cross-registration, events, and collaborations beyond HGSE.</p>
+          </article>
+          <article class="card">
+            <div class="icon">📊</div>
+            <h3>Decisions from your data</h3>
+            <p>I will collect what students need, share what I learn with the community, and report back on what changed. No guessing on your behalf.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🤝</div>
+            <h3>Belonging for everyone</h3>
+            <p>A community where international, first-generation, and underrepresented students feel seen, supported, and connected from week one.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="share" class="section">
+      <div class="glass form-wrap">
+        <p class="eyebrow">Your turn</p>
+        <h2>What would make HGSE better for you?</h2>
+        <p class="lede-sm">A concern, a frustration, a wish, a wild idea. Anything at all. I read every single one.</p>
+
+        <form id="concern-form" novalidate>
+          <label class="field">
+            <span>What's on your mind? <b class="req">*</b></span>
+            <textarea name="message" rows="5" required maxlength="4000" placeholder="For example: I wish it were easier to find research opportunities as a one-year student…"></textarea>
+          </label>
+
+          <div class="grid2">
+            <label class="field">
+              <span>Topic</span>
+              <select name="category">
+                <option value="Opportunities & careers">Opportunities &amp; careers</option>
+                <option value="Connecting with other Harvard schools">Connecting with other Harvard schools</option>
+                <option value="Academics & advising">Academics &amp; advising</option>
+                <option value="Wellbeing & support">Wellbeing &amp; support</option>
+                <option value="Belonging & inclusion">Belonging &amp; inclusion</option>
+                <option value="Community & events">Community &amp; events</option>
+                <option value="Facilities & logistics">Facilities &amp; logistics</option>
+                <option value="Something else">Something else</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Your program <small>(optional)</small></span>
+              <select name="program">
+                <option value="">Prefer not to say</option>
+                <option>Ed.M.</option>
+                <option>Ed.L.D.</option>
+                <option>Ph.D. in Education</option>
+                <option>C.A.S.</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="grid2">
+            <label class="field">
+              <span>Name <small>(optional)</small></span>
+              <input type="text" name="name" maxlength="120" autocomplete="name" placeholder="Anonymous">
+            </label>
+            <label class="field">
+              <span>Email <small>(optional, only if you'd like a reply)</small></span>
+              <input type="email" name="email" maxlength="160" autocomplete="email" placeholder="you@g.harvard.edu">
+            </label>
+          </div>
+
+          <!-- Honeypot: humans never see this -->
+          <label class="hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+
+          <div class="form-foot">
+            <button class="btn primary" type="submit" id="submit-btn">Send it to Amber</button>
+            <p class="tiny">Your response goes to a private sheet only I can read. No names are published.</p>
+          </div>
+          <p class="status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="thanks" id="thanks" hidden>
+          <div class="thanks-icon">🌍</div>
+          <h3>Thank you. Truly.</h3>
+          <p>I read every message myself. If you left an email, I will get back to you.</p>
+          <button class="btn ghost" type="button" id="again-btn">Share another thought</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Amber Bellou · Candidate for HGSE Student Council · Harvard Graduate School of Education</p>
+    <p class="tiny">Flags from around the world, because our community comes from around the world.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
