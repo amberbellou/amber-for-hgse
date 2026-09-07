@@ -252,3 +252,35 @@ h3 { font-family: var(--font-head); font-size: 1.25rem; margin: 10px 0 8px; }
   .polaroid { width: 210px; }
   .polaroid img { height: 200px; }
 }
+
+/* ---------- Grouped priorities ---------- */
+.pgroup { margin-bottom: 34px; }
+.pgroup:last-child { margin-bottom: 0; }
+.pgroup-title {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-head); font-size: 1.15rem; font-weight: 700;
+  margin: 0 0 14px; color: var(--ink);
+}
+.pgroup-title::after {
+  content: ""; flex: 1; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255,122,89,0.35), rgba(255,122,89,0));
+}
+.pgroup-title span {
+  display: inline-grid; place-items: center; flex: none;
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--coral), var(--gold));
+  color: #fff; font-size: 0.82rem; font-weight: 800; font-family: var(--font-body);
+  letter-spacing: 0.02em;
+}
+.vote-note {
+  margin: 16px 0 0; font-weight: 800; font-size: 0.95rem; color: var(--ink);
+  background: linear-gradient(135deg, #fff1de, #e6f6ff);
+  display: inline-block; padding: 9px 18px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.9);
+}
+.contact-line {
+  margin: 22px 0 0; padding: 16px 18px; border-radius: 16px;
+  background: linear-gradient(135deg, #fff6e8, #eaf6ff);
+  border: 1px solid rgba(255,255,255,0.9);
+  font-weight: 600; color: var(--ink-soft); font-size: 0.97rem;
+}
