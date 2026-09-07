@@ -273,11 +273,19 @@ h3 { font-family: var(--font-head); font-size: 1.25rem; margin: 10px 0 8px; }
   letter-spacing: 0.02em;
 }
 .vote-note {
-  margin: 16px 0 0; font-weight: 800; font-size: 0.95rem; color: var(--ink);
-  background: linear-gradient(135deg, #fff1de, #e6f6ff);
-  display: inline-block; padding: 9px 18px; border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.9);
+  margin: 20px 0 0; font-weight: 700; font-size: 1rem; color: var(--ink);
+  background: linear-gradient(135deg, #ffe9d2, #d9eeff);
+  display: inline-block; padding: 13px 24px; border-radius: 18px;
+  border: 1.5px solid rgba(255,122,89,0.35);
+  box-shadow: 0 8px 22px rgba(255,122,89,0.16);
+  animation: votepulse 2.6s ease-in-out infinite;
 }
+.vote-note b { font-weight: 800; }
+@keyframes votepulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 22px rgba(255,122,89,0.16); }
+  50%      { transform: scale(1.025); box-shadow: 0 12px 30px rgba(255,122,89,0.28); }
+}
+@media (prefers-reduced-motion: reduce) { .vote-note { animation: none; } }
 .contact-line {
   margin: 22px 0 0; padding: 16px 18px; border-radius: 16px;
   background: linear-gradient(135deg, #fff6e8, #eaf6ff);
