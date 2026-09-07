@@ -183,6 +183,8 @@ h3 { font-family: var(--font-head); font-size: 1.25rem; margin: 10px 0 8px; }
 .card:nth-child(2) .icon { background: linear-gradient(135deg, #e3f9ef, #fff1de); }
 .card:nth-child(3) .icon { background: linear-gradient(135deg, #eee6ff, #e3f9ef); }
 .card:nth-child(4) .icon { background: linear-gradient(135deg, #ffe4dc, #eee6ff); }
+.card-wide { grid-column: 1 / -1; background: linear-gradient(135deg, #fff6e8, #eaf6ff); border-color: rgba(255,122,89,0.25); }
+.card-wide .icon { background: #fff; }
 
 /* ---------- Form ---------- */
 .form-wrap { max-width: 820px; }
