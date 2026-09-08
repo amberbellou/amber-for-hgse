@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+@page { size: 8.5in 11in; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 8.5in; height: 11in; font-family: "Nunito", system-ui, sans-serif; color: #1f2a44;
+  background: radial-gradient(120% 80% at 50% 0%, #fff4e2 0%, #fff9f1 45%, #eef6ff 100%);
+  display: flex; flex-direction: column; overflow: hidden; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.strip { display: flex; height: 0.30in; overflow: hidden; flex: none; }
+.strip img { height: 100%; width: auto; flex: none; object-fit: cover; }
+.strip.bottom { margin-top: auto; }
+.wrap { padding: 0.30in 0.55in 0.20in; display: flex; flex-direction: column; flex: 1; }
+.eyebrow { font-weight: 900; letter-spacing: .18em; text-transform: uppercase; font-size: 10.5pt; color: #e8613f; text-align: center; }
+h1 { font-family: "Fraunces", Georgia, serif; font-weight: 900; font-size: 54pt; line-height: .95; text-align: center; margin: 4pt 0 2pt; letter-spacing: -.02em; }
+.role { text-align: center; font-family: "Fraunces", serif; font-weight: 600; font-size: 15pt; color: #4a5570; margin-bottom: 12pt; }
+.top { display: flex; gap: 16pt; align-items: stretch; margin-bottom: 13pt; }
+.photo { width: 2.30in; flex: none; border-radius: 12pt; overflow: hidden; box-shadow: 0 6pt 18pt rgba(31,42,68,.20); background:#eee; }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; display: block; }
+.pitch { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.tagline { font-family: "Fraunces", serif; font-weight: 700; font-size: 22pt; line-height: 1.08; margin-bottom: 8pt; }
+.tagline em { font-style: normal; color: #e8613f; }
+.blurb { font-size: 10.5pt; line-height: 1.42; color: #3c465e; }
+.blurb b { font-weight: 800; color: #1f2a44; }
+.plan-h { font-family: "Fraunces", serif; font-weight: 700; font-size: 14pt; margin: 0 0 7pt; display:flex; align-items:center; gap: 8pt; }
+.plan-h::after { content:""; flex:1; height:2pt; border-radius:2pt; background: linear-gradient(90deg, rgba(255,122,89,.45), rgba(255,122,89,0)); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7pt 14pt; }
+.item { display: flex; gap: 7pt; align-items: flex-start; }
+.dot { width: 15pt; height: 15pt; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 8.5pt; background: linear-gradient(135deg,#ff7a59,#ffc857); }
+.item p { font-size: 9.7pt; line-height: 1.33; }
+.item strong { display: block; font-weight: 900; font-size: 10.2pt; }
+.item span { color: #4a5570; }
+.who { margin-top: 11pt; background: linear-gradient(135deg,#fff2df,#e7f4ff); border-radius: 11pt; padding: 9pt 12pt; font-size: 9.6pt; line-height: 1.4; color: #3c465e; text-align: center; }
+.who b { color: #1f2a44; font-weight: 900; }
+.vote { margin-top: auto; display: flex; align-items: center; gap: 14pt; background: #1f2a44; color: #fff; border-radius: 14pt; padding: 13pt 16pt; }
+.vote .qr { width: 0.95in; height: 0.95in; flex: none; background:#fff; border-radius: 7pt; padding: 4pt; }
+.vote .qr img { width: 100%; height: 100%; display: block; }
+.vote-main { flex: 1; }
+.vote-main .d { font-family: "Fraunces", serif; font-weight: 900; font-size: 25pt; line-height: 1; }
+.vote-main .d span { color: #ffc857; }
+.vote-main .s { font-size: 10pt; margin-top: 3pt; opacity: .92; }
+.vote-main .u { font-size: 9.6pt; margin-top: 5pt; font-weight: 800; color: #ffc857; word-break: break-all; }
+</style></head><body>
+<div class="strip"><img src="../flags/dz.svg" alt=""><img src="../flags/fr.svg" alt=""><img src="../flags/us.svg" alt=""><img src="../flags/gb.svg" alt=""><img src="../flags/jp.svg" alt=""><img src="../flags/br.svg" alt=""><img src="../flags/ng.svg" alt=""><img src="../flags/ke.svg" alt=""><img src="../flags/in.svg" alt=""><img src="../flags/cn.svg" alt=""><img src="../flags/mx.svg" alt=""><img src="../flags/eg.svg" alt=""><img src="../flags/za.svg" alt=""><img src="../flags/kr.svg" alt=""><img src="../flags/de.svg" alt=""><img src="../flags/it.svg" alt=""><img src="../flags/es.svg" alt=""><img src="../flags/ca.svg" alt=""><img src="../flags/gh.svg" alt=""><img src="../flags/pk.svg" alt=""><img src="../flags/ph.svg" alt=""><img src="../flags/id.svg" alt=""><img src="../flags/tr.svg" alt=""><img src="../flags/se.svg" alt=""><img src="../flags/ma.svg" alt=""><img src="../flags/sn.svg" alt=""><img src="../flags/co.svg" alt=""><img src="../flags/pe.svg" alt=""><img src="../flags/vn.svg" alt=""><img src="../flags/th.svg" alt=""><img src="../flags/np.svg" alt=""><img src="../flags/bd.svg" alt=""><img src="../flags/et.svg" alt=""><img src="../flags/ci.svg" alt=""><img src="../flags/ug.svg" alt=""><img src="../flags/tz.svg" alt=""><img src="../flags/ar.svg" alt=""><img src="../flags/cl.svg" alt=""><img src="../flags/gr.svg" alt=""><img src="../flags/pt.svg" alt=""><img src="../flags/ie.svg" alt=""><img src="../flags/nl.svg" alt=""><img src="../flags/be.svg" alt=""><img src="../flags/ch.svg" alt=""><img src="../flags/at.svg" alt=""><img src="../flags/pl.svg" alt=""><img src="../flags/ua.svg" alt=""><img src="../flags/ro.svg" alt=""></div>
+<div class="wrap">
+  <p class="eyebrow">For HGSE Student Council</p>
+  <h1>Amber Bellou</h1>
+  <p class="role">Ed.M. candidate &middot; Harvard Graduate School of Education</p>
+
+  <div class="top">
+    <div class="photo"><img src="../photos/banner.jpg" alt="Amber Bellou"></div>
+    <div class="pitch">
+      <p class="tagline">Every voice at HGSE<br><em>deserves to be heard.</em></p>
+      <p class="blurb">I'm Algerian, I grew up in France, and I moved to the US alone as an international student in high school and figured out this system by myself. I hold <b>two bachelor's degrees</b> and a <b>master's in data and computational social science</b>, and I work in <b>educational nonprofits</b> on AI safety and how it shapes the way we learn. I'm running to <b>listen first</b>, gather what we actually need, and turn it into real change.</p>
+    </div>
+  </div>
+
+  <h2 class="plan-h">What I will work on</h2>
+  <div class="grid">
+    <div class="item"><div class="dot">🚪</div><p><strong>Open doors to opportunity</strong><span>Fair, early access to internships, research, labs and jobs, in one shared place.</span></p></div>
+    <div class="item"><div class="dot">🌉</div><p><strong>One Harvard, not one building</strong><span>Real ways into the other Harvard grad schools, not just HGSE.</span></p></div>
+    <div class="item"><div class="dot">🌍</div><p><strong>International students</strong><span>Visa and OPT guidance that arrives before you need it. I've lived this.</span></p></div>
+    <div class="item"><div class="dot">💻</div><p><strong>Online students, equally</strong><span>Same access to research, internships and faculty. You are HGSE too.</span></p></div>
+    <div class="item"><div class="dot">🎓</div><p><strong>Closer to faculty</strong><span>Meet-ups, small lunches and mentoring, for online and in-person students.</span></p></div>
+    <div class="item"><div class="dot">👶</div><p><strong>Student parents</strong><span>A parent network, kid-friendly events, and family-aware scheduling.</span></p></div>
+    <div class="item"><div class="dot">🍽️</div><p><strong>Food on the table</strong><span>More community meals, better deals, and food resources for anyone who needs them.</span></p></div>
+    <div class="item"><div class="dot">📊</div><p><strong>Decisions from your data</strong><span>Every month I publish what you told me and what actually changed.</span></p></div>
+  </div>
+
+  <p class="who">I would be honored to serve <b>every</b> HGSE student &mdash; international, African, Asian, Black, white, students of color, Muslim, Jewish, Christian, Indigenous, LGBTQ+, disabled, online, student parents, women, <b>every single one of us.</b></p>
+
+  <div class="vote">
+    <div class="qr"><img src="qr.png" alt="QR code to amberbellou.github.io/amber-for-hgse"></div>
+    <div class="vote-main">
+      <p class="d">VOTE <span>SEPT 8&ndash;11</span></p>
+      <p class="s">The ballot comes to your HGSE email. It takes one minute.</p>
+      <p class="u">Scan the code &rarr; read the full plan &amp; tell me what to fix<br>amberbellou.github.io/amber-for-hgse</p>
+    </div>
+  </div>
+</div>
+<div class="strip bottom"><img src="../flags/dz.svg" alt=""><img src="../flags/fr.svg" alt=""><img src="../flags/us.svg" alt=""><img src="../flags/gb.svg" alt=""><img src="../flags/jp.svg" alt=""><img src="../flags/br.svg" alt=""><img src="../flags/ng.svg" alt=""><img src="../flags/ke.svg" alt=""><img src="../flags/in.svg" alt=""><img src="../flags/cn.svg" alt=""><img src="../flags/mx.svg" alt=""><img src="../flags/eg.svg" alt=""><img src="../flags/za.svg" alt=""><img src="../flags/kr.svg" alt=""><img src="../flags/de.svg" alt=""><img src="../flags/it.svg" alt=""><img src="../flags/es.svg" alt=""><img src="../flags/ca.svg" alt=""><img src="../flags/gh.svg" alt=""><img src="../flags/pk.svg" alt=""><img src="../flags/ph.svg" alt=""><img src="../flags/id.svg" alt=""><img src="../flags/tr.svg" alt=""><img src="../flags/se.svg" alt=""><img src="../flags/ma.svg" alt=""><img src="../flags/sn.svg" alt=""><img src="../flags/co.svg" alt=""><img src="../flags/pe.svg" alt=""><img src="../flags/vn.svg" alt=""><img src="../flags/th.svg" alt=""><img src="../flags/np.svg" alt=""><img src="../flags/bd.svg" alt=""><img src="../flags/et.svg" alt=""><img src="../flags/ci.svg" alt=""><img src="../flags/ug.svg" alt=""><img src="../flags/tz.svg" alt=""><img src="../flags/ar.svg" alt=""><img src="../flags/cl.svg" alt=""><img src="../flags/gr.svg" alt=""><img src="../flags/pt.svg" alt=""><img src="../flags/ie.svg" alt=""><img src="../flags/nl.svg" alt=""><img src="../flags/be.svg" alt=""><img src="../flags/ch.svg" alt=""><img src="../flags/at.svg" alt=""><img src="../flags/pl.svg" alt=""><img src="../flags/ua.svg" alt=""><img src="../flags/ro.svg" alt=""></div>
+
+</body></html>
