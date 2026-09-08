@@ -1,10 +1,11 @@
 # Campaign flyer
 
 - `Amber-Bellou-HGSE-flyer.pdf` — US Letter (8.5x11), print this.
-- `Amber-Bellou-HGSE-whatsapp.png` — 1080x1350, send this in WhatsApp/text.
+- `Amber-Bellou-HGSE-whatsapp.png` — 1080x1350, send this in WhatsApp/text chats.
+- `Amber-Bellou-HGSE-story.png` — 1080x1920, post this as an Instagram Story or WhatsApp Status.
 - `qr.png` — the QR code alone, scans to https://amberbellou.github.io/amber-for-hgse/ (verified).
 
-Sources: `flyer-print.html` and `flyer-social.html`. To regenerate after editing:
+Sources: `flyer-print.html`, `flyer-social.html`, `flyer-story.html`. To regenerate after editing:
 
 ```bash
 cd flyer
