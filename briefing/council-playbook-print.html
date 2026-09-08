@@ -1,0 +1,500 @@
+<title>How HGSE Actually Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=Public+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root {
+  --paper:      #f2f4f7;
+  --surface:    #ffffff;
+  --surface-2:  #e8ecf2;
+  --ink:        #151a24;
+  --ink-2:      #4d5768;
+  --ink-3:      #7a8496;
+  --rule:       #d3d9e2;
+  --accent:     #8c2332;
+  --accent-ink: #6d1a26;
+  --accent-bg:  #f6e9eb;
+  --gold:       #8a6b1f;
+  --gold-bg:    #f7f0dd;
+  --shadow:     0 1px 2px rgba(21,26,36,.05), 0 8px 24px rgba(21,26,36,.06);
+  --maxw: 62rem;
+}
+:root:not([data-theme="light"]) {
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper:      #10141c;
+    --surface:    #181d27;
+    --surface-2:  #212734;
+    --ink:        #e9edf4;
+    --ink-2:      #a8b2c2;
+    --ink-3:      #7d8798;
+    --rule:       #2c3341;
+    --accent:     #e0788a;
+    --accent-ink: #f0a3b0;
+    --accent-bg:  #2a1a20;
+    --gold:       #d6b35c;
+    --gold-bg:    #2a2416;
+    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper:      #10141c;
+  --surface:    #181d27;
+  --surface-2:  #212734;
+  --ink:        #e9edf4;
+  --ink-2:      #a8b2c2;
+  --ink-3:      #7d8798;
+  --rule:       #2c3341;
+  --accent:     #e0788a;
+  --accent-ink: #f0a3b0;
+  --accent-bg:  #2a1a20;
+  --gold:       #d6b35c;
+  --gold-bg:    #2a2416;
+  --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.3);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px 96px; }
+
+/* ---------- Masthead ---------- */
+.mast {
+  border-bottom: 2px solid var(--ink);
+  padding: 40px 0 22px;
+  margin-bottom: 34px;
+}
+.kicker {
+  font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 14px;
+}
+h1 {
+  font-family: Spectral, Georgia, serif;
+  font-weight: 700; font-size: clamp(2.1rem, 6vw, 3.4rem); line-height: 1.04;
+  margin: 0 0 14px; letter-spacing: -.015em; text-wrap: balance;
+}
+.standfirst {
+  font-family: Spectral, Georgia, serif;
+  font-size: clamp(1.05rem, 2.4vw, 1.3rem); line-height: 1.5; color: var(--ink-2);
+  margin: 0; max-width: 46ch;
+}
+.byline {
+  margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--rule);
+  display: flex; flex-wrap: wrap; gap: 8px 20px;
+  font-size: 13px; color: var(--ink-3);
+}
+.byline b { color: var(--ink-2); font-weight: 600; }
+
+/* ---------- Sections ---------- */
+section { margin-bottom: 52px; scroll-margin-top: 16px; }
+.sec-head { margin-bottom: 22px; }
+.sec-label {
+  font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-3); margin: 0 0 8px;
+}
+h2 {
+  font-family: Spectral, Georgia, serif;
+  font-weight: 600; font-size: clamp(1.5rem, 3.6vw, 2rem); line-height: 1.15;
+  margin: 0 0 10px; letter-spacing: -.01em; text-wrap: balance;
+}
+.sec-head p { margin: 0; color: var(--ink-2); max-width: 62ch; }
+
+/* ---------- Governance list ---------- */
+.bodies { display: flex; flex-direction: column; gap: 2px; background: var(--rule);
+  border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.body-row {
+  background: var(--surface); padding: 20px 22px;
+  display: grid; grid-template-columns: 15rem 1fr; gap: 6px 28px; align-items: start;
+}
+.body-row > h3 {
+  font-family: Spectral, Georgia, serif; font-weight: 600; font-size: 1.08rem;
+  margin: 0; line-height: 1.25;
+}
+.body-row > h3 span {
+  display: block; font-family: "Public Sans", sans-serif; font-weight: 600;
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3);
+  margin-top: 4px;
+}
+.body-row > div p { margin: 0 0 8px; color: var(--ink-2); font-size: 15px; }
+.body-row > div p:last-child { margin-bottom: 0; }
+.body-row .you {
+  display: inline-block; margin-top: 4px; font-size: 13px; font-weight: 600;
+  color: var(--accent-ink); background: var(--accent-bg);
+  padding: 5px 11px; border-radius: 3px;
+}
+.body-row.key { background: var(--surface); border-left: 3px solid var(--accent); }
+
+/* ---------- Plan table ---------- */
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14.5px; }
+thead th {
+  text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .11em;
+  text-transform: uppercase; color: var(--ink-3);
+  padding: 13px 16px; border-bottom: 1.5px solid var(--rule); white-space: nowrap;
+}
+tbody td { padding: 14px 16px; border-bottom: 1px solid var(--rule); vertical-align: top; color: var(--ink-2); }
+tbody tr:last-child td { border-bottom: 0; }
+tbody td:first-child { color: var(--ink); font-weight: 600; }
+.when { white-space: nowrap; font-size: 13px; font-weight: 600; color: var(--gold); }
+
+/* ---------- 90-day steps (a real sequence) ---------- */
+.steps { display: flex; flex-direction: column; gap: 14px; counter-reset: step; }
+.step {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
+  padding: 18px 20px 18px 62px; position: relative;
+}
+.step::before {
+  counter-increment: step; content: counter(step);
+  position: absolute; left: 20px; top: 18px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--ink); color: var(--paper);
+  font-size: 13px; font-weight: 700; display: grid; place-items: center;
+  font-variant-numeric: tabular-nums;
+}
+.step h3 { font-family: Spectral, Georgia, serif; font-weight: 600; font-size: 1.05rem; margin: 0 0 5px; }
+.step p { margin: 0; color: var(--ink-2); font-size: 15px; }
+.step .tag {
+  display: inline-block; margin-top: 9px; font-size: 11px; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--gold);
+  background: var(--gold-bg); padding: 4px 9px; border-radius: 3px;
+}
+
+/* ---------- Q&A ---------- */
+.qa { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule); }
+.qa > div { padding: 20px 0; border-bottom: 1px solid var(--rule); }
+.qa h3 {
+  font-family: Spectral, Georgia, serif; font-style: italic; font-weight: 400;
+  font-size: 1.14rem; margin: 0 0 9px; color: var(--ink);
+}
+.qa p { margin: 0; color: var(--ink-2); max-width: 68ch; }
+.qa p + p { margin-top: 9px; }
+.qa strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- Callout ---------- */
+.callout {
+  background: var(--surface); border-left: 3px solid var(--accent);
+  padding: 20px 24px; margin: 24px 0 0; border-radius: 0 4px 4px 0; box-shadow: var(--shadow);
+}
+.callout p { margin: 0; font-family: Spectral, Georgia, serif; font-size: 1.06rem; line-height: 1.55; }
+.callout p + p { margin-top: 10px; }
+
+/* ---------- Contacts ---------- */
+.contacts { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1px;
+  background: var(--rule); border: 1px solid var(--rule); border-radius: 4px; overflow: hidden; }
+.contact { background: var(--surface); padding: 17px 19px; }
+.contact b { display: block; font-size: 15px; }
+.contact span { display: block; font-size: 13.5px; color: var(--ink-2); margin-top: 3px; }
+.contact em { display: block; font-style: normal; font-size: 12.5px; color: var(--accent-ink); margin-top: 7px; font-weight: 600; }
+
+footer {
+  margin-top: 60px; padding-top: 22px; border-top: 2px solid var(--ink);
+  font-size: 13px; color: var(--ink-3);
+}
+footer a { color: var(--accent-ink); }
+
+@media (max-width: 720px) {
+  .body-row { grid-template-columns: 1fr; gap: 10px; padding: 18px; }
+  .step { padding: 16px 16px 16px 54px; }
+  .step::before { left: 16px; top: 16px; }
+}
+</style>
+
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker">Briefing &middot; Amber Bellou for HGSE Student Council</p>
+  <h1>How HGSE Actually Works</h1>
+  <p class="standfirst">Most candidates promise to be your advocate. Almost none can tell you which room the decision gets made in. This is that map, and exactly what I would do in each room.</p>
+  <p class="byline"><span><b>For:</b> conversations with students, week of September 8</span><span><b>Voting:</b> September 8&ndash;11, ballot by HGSE email</span></p>
+</header>
+
+<section>
+  <div class="sec-head">
+    <p class="sec-label">Part one</p>
+    <h2>The rooms where things get decided</h2>
+    <p>HGSE does not have one student government that runs everything. It has several bodies, each with a different job and a different kind of power. Knowing which is which is the difference between a complaint and a change.</p>
+  </div>
+
+  <div class="bodies">
+    <div class="body-row">
+      <h3>Student Advisory Boards<span>SAB &middot; one per program</span></h3>
+      <div>
+        <p>Each master's program has its own board. Members are the liaison between students in that program and HGSE faculty and administration, and they help shape program events and initiatives.</p>
+        <p>Membership is handled at the program level, so it varies by program. Doctoral representation from Ph.D. and Ed.L.D. students runs through the Director for Doctoral Studies.</p>
+      </div>
+    </div>
+
+    <div class="body-row key">
+      <h3>Convening of Student Program Representatives<span>CSPR &middot; once a semester</span></h3>
+      <div>
+        <p>All program board members meet together, hosted by the Office of Student Affairs, and senior administrators attend. This is where issues affecting the whole school get raised, not just one program.</p>
+        <p><strong>The part almost nobody knows:</strong> representatives submit agenda items to the Office of Student Affairs in advance. The agenda is not handed down. It is built from what representatives send in.</p>
+        <span class="you">This is the single biggest lever a representative has</span>
+      </div>
+    </div>
+
+    <div class="body-row">
+      <h3>Student Council<span>Representatives by degree program</span></h3>
+      <div>
+        <p>Made up of representatives from each master's and doctoral program. It works through committees, including the Student Advocacy and Issues Committee, whose written job is to find out what students actually think about academic, social and community matters, and then take that to faculty, staff and other decision-makers.</p>
+        <p>The same committee is charged with working across schools, not only inside HGSE.</p>
+      </div>
+    </div>
+
+    <div class="body-row">
+      <h3>Diversity and Inclusion Advisory Council<span>DIAC &middot; five times a semester</span></h3>
+      <div>
+        <p>Elected students from program cohorts and affinity organizations sit alongside the Associate Dean for Enrollment and Student Services, the Director of Student Affairs, and the Assistant Director for Multicultural and International Affairs.</p>
+        <p><strong>DIAC controls real money.</strong> It reviews proposals to the Dean's Diversity Innovation Fund and decides which student initiatives get funded.</p>
+      </div>
+    </div>
+
+    <div class="body-row">
+      <h3>Harvard Graduate Council<span>HGC &middot; all twelve schools</span></h3>
+      <div>
+        <p>The university-wide student government for every Harvard graduate and professional school. HGSE sends one voting representative, who is expected to gather input from HGSE students before voting.</p>
+        <p>HGC exists to break down the walls between the twelve schools, and it administers funding for cross-school activity, including a fund that gives student groups $500 or $2,500 for events that bring schools together. Very few HGSE groups ever apply.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>So the honest answer to &ldquo;can a student rep actually change anything?&rdquo; is this: a rep cannot set tuition, admissions or grades. A rep <em>can</em> put an item on the agenda that senior administrators sit down to discuss, decide where diversity funding goes, and unlock cross-school money almost nobody claims.</p>
+    <p>Those are small levers. Pulled deliberately, with evidence, they move real things.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="sec-label">Part two</p>
+    <h2>What I would actually do, and through which door</h2>
+    <p>Every promise on my site maps to a specific mechanism above. No promise here depends on a power the council does not have.</p>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th>What I promised</th><th>The mechanism I would use</th><th>The first concrete step</th><th>By when</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Access to opportunities</td>
+          <td>CSPR agenda item, with the Career Services Office</td>
+          <td>Ask for one shared, dated board of internships, research assistantships and labs, open to every program</td>
+          <td class="when">Fall</td>
+        </tr>
+        <tr>
+          <td>One Harvard</td>
+          <td>HGSE's Harvard Graduate Council representative and its cross-school fund</td>
+          <td>Apply for one funded cross-school event, and circulate a weekly digest of what the other schools have opened to us</td>
+          <td class="when">Oct&ndash;Nov</td>
+        </tr>
+        <tr>
+          <td>International students</td>
+          <td>Office of Student Affairs international student support, with the Harvard International Office</td>
+          <td>Request an HGSE-specific immigration briefing before winter travel, given the new four-year visa cap and shorter grace period</td>
+          <td class="when">Before Dec</td>
+        </tr>
+        <tr>
+          <td>Online students, equally</td>
+          <td>CSPR agenda, plus program advisory boards</td>
+          <td>Make sure an online-program voice is on the agenda every single convening, not occasionally</td>
+          <td class="when">Fall</td>
+        </tr>
+        <tr>
+          <td>Closer to faculty</td>
+          <td>Program advisory boards and Office of Student Affairs events</td>
+          <td>Pilot one informal student-faculty mixer, an idea a student already sent me through the site</td>
+          <td class="when">Fall</td>
+        </tr>
+        <tr>
+          <td>Student parents</td>
+          <td>Office of Student Affairs, parents and partners resources</td>
+          <td>Start an opt-in parent network, and ask for one kids-welcome event and one clear family resources guide</td>
+          <td class="when">October</td>
+        </tr>
+        <tr>
+          <td>Food access</td>
+          <td>Student organization funding, plus Office of Student Affairs</td>
+          <td>One shared calendar of where food is on campus, and a push for better HGSE terms at Harvard cafes</td>
+          <td class="when">Ongoing</td>
+        </tr>
+        <tr>
+          <td>Wellbeing and belonging</td>
+          <td>CSPR agenda item</td>
+          <td>Bring evidence on deadlines stacking in the same weeks, and make sure everyone knows what support is already free</td>
+          <td class="when">Fall</td>
+        </tr>
+        <tr>
+          <td>Accessibility and quiet space</td>
+          <td>Office of Student Affairs and disability services</td>
+          <td>Accessible rooms, captions and advance materials as the default at events, and a quiet room for prayer or rest</td>
+          <td class="when">Fall</td>
+        </tr>
+        <tr>
+          <td>Easier student org funding</td>
+          <td>Office of Student Affairs administration</td>
+          <td>Propose a fast path for small expenses, instead of a fresh application ten business days before every single event</td>
+          <td class="when">November</td>
+        </tr>
+        <tr>
+          <td>Your voice, in the open</td>
+          <td>My own collection site, reported publicly</td>
+          <td>Publish a monthly summary: how many people raised each topic, what I took in, what changed</td>
+          <td class="when">Monthly</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="sec-label">Part three</p>
+    <h2>The first ninety days</h2>
+    <p>In a one-year program there is no time for a slow start. This is the order I would work in.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <h3>Keep collecting, in the open</h3>
+      <p>The site is already live and already receiving concerns, anonymously if people prefer. It keeps running. Volume matters, because ten students saying the same thing is evidence and one student saying it is an anecdote.</p>
+      <span class="tag">Already running</span>
+    </div>
+    <div class="step">
+      <h3>Turn what students said into agenda items</h3>
+      <p>Sort every response by topic, count them, and submit the top items to the Office of Student Affairs ahead of the semester's convening. Walk in with numbers instead of impressions.</p>
+      <span class="tag">Before the convening</span>
+    </div>
+    <div class="step">
+      <h3>Meet the three people who can actually unblock things</h3>
+      <p>The Assistant Dean of Student Affairs, the staff member responsible for community building and international student support, and the administrator who handles student organization funding. Ask each what they need from students to say yes.</p>
+      <span class="tag">First month</span>
+    </div>
+    <div class="step">
+      <h3>Ship two visible wins early</h3>
+      <p>The student-faculty mixer and the shared opportunities board. Both are cheap, both were asked for by students, and both prove the channel works so more people use it.</p>
+      <span class="tag">By November</span>
+    </div>
+    <div class="step">
+      <h3>Report back publicly, every month</h3>
+      <p>What you told me, what I raised, what moved and what did not. Including the things I failed to change, because a representative who only reports wins is not reporting.</p>
+      <span class="tag">Monthly, all year</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="sec-label">Part four</p>
+    <h2>If someone asks me this, here is my answer</h2>
+  </div>
+
+  <div class="qa">
+    <div>
+      <h3>&ldquo;Doesn't student council just plan parties?&rdquo;</h3>
+      <p>Some of it is events, and events matter more than people admit when most of us are here for nine months. But the council also decides where diversity funding goes, sends the vote that represents HGSE across all twelve Harvard schools, and sets the agenda that senior administrators sit down to discuss. I plan to use all three.</p>
+    </div>
+    <div>
+      <h3>&ldquo;Can you really change anything in one year?&rdquo;</h3>
+      <p>Not everything. I cannot move tuition, financial aid, admissions or grades, and I am not going to pretend otherwise. <strong>What is genuinely reachable</strong> is access to opportunities, connection to the other Harvard schools, support for international students, treatment of online students, and how easy it is for a student group to put on an event. Those are the things I am promising, because those are the things the job can actually touch.</p>
+    </div>
+    <div>
+      <h3>&ldquo;What makes you different from the other candidates?&rdquo;</h3>
+      <p>I am not asking you to trust that I will listen. I built a place where you can tell me right now, and I will publish what I hear and what came of it. My master's is in data and computational social science, so turning what a community says into something decision-makers act on is the thing I was actually trained to do.</p>
+    </div>
+    <div>
+      <h3>&ldquo;I'm online. I'm a parent. I'm international. What is in this for me?&rdquo;</h3>
+      <p>Those three groups are the ones the standard HGSE experience serves worst, and each has its own promise on my platform rather than a mention in a list. I moved to the United States alone as an international student in high school and worked out this system by myself, so the international piece is not a talking point for me.</p>
+    </div>
+    <div>
+      <h3>&ldquo;Why should I bother voting?&rdquo;</h3>
+      <p>Turnout in student elections is usually low, which means a small number of votes genuinely decides it. The ballot is in your HGSE email between September 8 and 11 and takes about a minute. Even if you vote for someone else, please vote.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <p class="sec-label">Reference</p>
+    <h2>People and rules worth knowing by heart</h2>
+    <p>Useful in a hallway conversation, and useful on day one of the job.</p>
+  </div>
+
+  <div class="contacts">
+    <div class="contact">
+      <b>Assistant Dean of Student Affairs and Student Life</b>
+      <span>Kevin Boehm. Also a Title IX resource coordinator for students.</span>
+      <em>Supports Student Council</em>
+    </div>
+    <div class="contact">
+      <b>Community Building and International Student Support</b>
+      <span>Andrea Le, Associate Director. Also a Title IX resource coordinator.</span>
+      <em>The door for international student support</em>
+    </div>
+    <div class="contact">
+      <b>Senior Student Affairs Administrator</b>
+      <span>Crystal Quintanilla. Handles student organization recognition and funding.</span>
+      <em>Every event purchase goes through here</em>
+    </div>
+    <div class="contact">
+      <b>Student organization funding rules</b>
+      <span>A fresh application for every event, at least ten business days ahead. No spending before approval. Nothing rolls over.</span>
+      <em>The friction I want to reduce</em>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Amber Bellou &middot; Ed.M. candidate, Harvard Graduate School of Education &middot; Running for Student Council<br>
+  Tell me what to improve at <a href="https://amberbellou.github.io/amber-for-hgse/">amberbellou.github.io/amber-for-hgse</a>. That site is not the ballot; the ballot comes to your HGSE email.</p>
+  <p style="margin-top:12px">Governance details drawn from the HGSE Office of Student Affairs pages on student representation, the Student Advocacy and Issues Committee, the Diversity and Inclusion Advisory Council, and student organizations, plus published reporting on the Harvard Graduate Council. Confirm specifics with the Office of Student Affairs before quoting them as policy.</p>
+</footer>
+
+</div>
+
+<style>
+/* ---- print build: force the light palette, paginate cleanly ---- */
+@page { size: 8.5in 11in; margin: 0.62in 0.7in 0.6in; }
+:root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+  color-scheme: light !important;
+  --paper: #ffffff; --surface: #ffffff; --surface-2: #eef1f5;
+  --ink: #151a24; --ink-2: #454f60; --ink-3: #6b7484;
+  --rule: #c9d0da; --accent: #8c2332; --accent-ink: #6d1a26; --accent-bg: #f6e9eb;
+  --gold: #7a5e1a; --gold-bg: #f7f0dd; --shadow: none;
+}
+html, body { background: #fff !important; }
+body { font-size: 10.2pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.wrap { max-width: none; padding: 0; }
+.mast { padding-top: 0; margin-bottom: 22px; }
+h1 { font-size: 27pt; }
+.standfirst { font-size: 11.5pt; max-width: 44ch; }
+h2 { font-size: 15.5pt; }
+section { margin-bottom: 26px; break-inside: auto; }
+.sec-head { break-after: avoid; }
+.body-row, .step, .qa > div, .contact, .callout, tr { break-inside: avoid; }
+thead { display: table-header-group; }
+table { min-width: 0; font-size: 8.8pt; }
+thead th, tbody td { padding: 8px 10px; }
+.body-row { padding: 13px 15px; grid-template-columns: 12.5rem 1fr; gap: 5px 20px; }
+.body-row > div p { font-size: 9.6pt; }
+.step { padding: 13px 15px 13px 50px; }
+.step::before { left: 15px; top: 14px; }
+.step p, .qa p, .contact span { font-size: 9.6pt; }
+.qa > div { padding: 14px 0; }
+.callout { box-shadow: none; border: 1px solid var(--rule); border-left: 3px solid var(--accent); padding: 15px 18px; }
+.callout p { font-size: 10.4pt; }
+footer { margin-top: 26px; page-break-inside: avoid; }
+a { color: var(--accent-ink); text-decoration: none; }
+</style>
